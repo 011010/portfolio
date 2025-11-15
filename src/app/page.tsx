@@ -2,23 +2,10 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+import Background3D from '@/components/Background3D';
 import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
 import { projects } from '@/data/projects';
-
-// Import Background3D dynamically to avoid SSR issues with Three.js
-const Background3D = dynamic(() => import('@/components/Background3D'), {
-  ssr: false,
-  loading: () => (
-    <div className="fixed inset-0 -z-10">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cosmic-dark/50 to-cosmic-dark" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" />
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" />
-      <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" />
-    </div>
-  ),
-});
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
