@@ -5,6 +5,8 @@ import { useRef, useEffect, useState } from 'react';
 import Background3D from '@/components/Background3D';
 import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
+import About from '@/components/About';
+import Contact from '@/components/Contact';
 import { projects } from '@/data/projects';
 
 export default function Home() {
@@ -108,21 +110,23 @@ export default function Home() {
             transition={{ delay: 0.6 }}
             className="flex gap-4 justify-center"
           >
-            <motion.button
+            <motion.a
+              href="#proyectos"
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(139, 92, 246, 0.5)' }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold text-lg"
+              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold text-lg inline-block"
             >
               Ver Proyectos
-            </motion.button>
+            </motion.a>
 
-            <motion.button
+            <motion.a
+              href="#contacto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 glass rounded-full font-semibold text-lg border border-white/20"
+              className="px-8 py-4 glass rounded-full font-semibold text-lg border border-white/20 inline-block"
             >
               Contactar
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Scroll indicator */}
@@ -198,6 +202,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About Section */}
+      <About />
+
       {/* Stats Section */}
       <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
@@ -226,6 +233,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contact Section */}
+      <Contact />
+
       {/* Footer */}
       <footer className="relative py-12 px-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
@@ -240,13 +250,14 @@ export default function Home() {
             <p className="text-white/70 mb-8">
               Trabajemos juntos en tu próximo proyecto
             </p>
-            <motion.button
+            <motion.a
+              href="#contacto"
               whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(139, 92, 246, 0.5)' }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold"
             >
               Hablemos
-            </motion.button>
+            </motion.a>
 
             <div className="mt-12 text-white/50 text-sm">
               <p>© 2024 Portfolio Creativo. Hecho con ❤️ y código</p>
