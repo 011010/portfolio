@@ -1,178 +1,129 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { languageStats } from '@/data/projects';
+
+const FOCUS_AREAS = [
+  {
+    title: 'PWAs',
+    description: 'Apps instalables, offline-first, pensadas para usarse todos los días.',
+  },
+  {
+    title: 'Automatización',
+    description: 'Procesos internos que dejan de hacerse a mano — para CFE, logística y más.',
+  },
+  {
+    title: 'Sistemas internos',
+    description: 'Gestión documental, control de activos, herramientas hechas a la medida.',
+  },
+];
 
 export default function About() {
-  const skills = [
-    { name: 'React & Next.js', level: 95, color: 'from-blue-500 to-cyan-500' },
-    { name: 'TypeScript', level: 90, color: 'from-blue-600 to-blue-400' },
-    { name: 'Node.js & APIs', level: 88, color: 'from-green-500 to-emerald-500' },
-    { name: 'UI/UX Design', level: 85, color: 'from-purple-500 to-pink-500' },
-    { name: 'Three.js & WebGL', level: 80, color: 'from-orange-500 to-red-500' },
-    { name: 'Database & Cloud', level: 82, color: 'from-cyan-500 to-blue-500' },
-  ];
-
-  const experience = [
-    {
-      role: 'Senior Full Stack Developer',
-      company: 'Tech Innovators Inc.',
-      period: '2022 - Presente',
-      description: 'Liderando el desarrollo de aplicaciones web innovadoras con React y Node.js',
-    },
-    {
-      role: 'Frontend Developer',
-      company: 'Creative Solutions',
-      period: '2020 - 2022',
-      description: 'Creación de interfaces modernas y responsive con enfoque en UX',
-    },
-    {
-      role: 'Web Developer',
-      company: 'Digital Agency',
-      period: '2018 - 2020',
-      description: 'Desarrollo de sitios web y aplicaciones para diversos clientes',
-    },
-  ];
+  const totalRepos = languageStats.reduce((sum, l) => sum + l.count, 0);
 
   return (
-    <section id="sobre-mi" className="relative py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Title */}
+    <section id="sobre-mi" className="relative py-28 px-6">
+      <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-20"
+          className="mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-              Sobre Mí
-            </span>
-          </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            Desarrollador apasionado por crear experiencias digitales únicas
-          </p>
+          <p className="font-mono text-signal text-sm mb-3">// sobre-mi</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-fg">Cómo trabajo</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {/* Bio */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="glass rounded-3xl p-8 md:p-10"
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-3 panel p-8"
           >
-            <h3 className="text-3xl font-bold mb-6 gradient-text">Mi Historia</h3>
-            <div className="space-y-4 text-white/80 text-lg leading-relaxed">
-              <p>
-                Soy un desarrollador full-stack con más de 5 años de experiencia
-                creando aplicaciones web innovadoras y de alto rendimiento.
-              </p>
-              <p>
-                Mi pasión es combinar código limpio con diseño excepcional para
-                crear experiencias digitales que no solo funcionan perfectamente,
-                sino que también sorprenden y deleitan a los usuarios.
-              </p>
-              <p>
-                Me especializo en tecnologías modernas como React, Next.js,
-                TypeScript y Node.js, y estoy constantemente aprendiendo y
-                experimentando con nuevas herramientas y técnicas.
-              </p>
-            </div>
+            <p className="text-fg/90 text-lg leading-relaxed mb-4">
+              Construyo software para problemas reales: control financiero personal,
+              gestión documental, automatización de procesos para instituciones como la CFE.
+            </p>
+            <p className="text-muted leading-relaxed">
+              La mayoría de mi trabajo vive en PWAs y sistemas internos — herramientas
+              pensadas para producción, no para la demo. Trabajo principalmente en
+              TypeScript y Python, de extremo a extremo: desde la interfaz hasta el
+              proceso que corre en segundo plano.
+            </p>
 
-            {/* Social Links */}
-            <div className="flex gap-4 mt-8">
+            <div className="grid grid-cols-3 gap-6 mt-8 pt-8 border-t border-line">
               {[
-                { name: 'GitHub', icon: '⚡' },
-                { name: 'LinkedIn', icon: '💼' },
-                { name: 'Twitter', icon: '🐦' },
-                { name: 'Email', icon: '✉️' },
-              ].map((social) => (
-                <motion.button
-                  key={social.name}
-                  whileHover={{ scale: 1.1, y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 glass rounded-full flex items-center justify-center text-2xl border border-white/10 hover:border-purple-500/50 transition-colors"
-                  title={social.name}
-                >
-                  {social.icon}
-                </motion.button>
+                { value: '12', label: 'repos públicos' },
+                { value: '7+', label: 'años en GitHub' },
+                { value: '6', label: 'lenguajes' },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div className="font-mono text-3xl font-medium text-signal tabular-nums">
+                    {stat.value}
+                  </div>
+                  <div className="text-muted text-xs mt-1">{stat.label}</div>
+                </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Skills */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="glass rounded-3xl p-8 md:p-10"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-2 panel p-8"
           >
-            <h3 className="text-3xl font-bold mb-8 gradient-text">Habilidades</h3>
-            <div className="space-y-6">
-              {skills.map((skill, index) => (
+            <p className="font-mono text-xs text-muted mb-4">stack — por repos en GitHub</p>
+
+            <div className="h-2.5 rounded-full overflow-hidden flex mb-5 bg-white/5">
+              {languageStats.map((lang) => (
                 <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  key={lang.name}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${(lang.count / totalRepos) * 100}%` }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div className="flex justify-between mb-2">
-                    <span className="font-semibold text-white/90">{skill.name}</span>
-                    <span className="text-white/70">{skill.level}%</span>
-                  </div>
-                  <div className="h-3 bg-white/10 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
-                      className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
-                    />
-                  </div>
-                </motion.div>
+                  transition={{ duration: 0.8 }}
+                  style={{ backgroundColor: lang.color }}
+                />
               ))}
             </div>
+
+            <ul className="space-y-2.5">
+              {languageStats.map((lang) => (
+                <li key={lang.name} className="flex items-center justify-between text-sm">
+                  <span className="flex items-center gap-2 text-fg/80">
+                    <span
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: lang.color }}
+                    />
+                    {lang.name}
+                  </span>
+                  <span className="font-mono text-muted tabular-nums">{lang.count}</span>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         </div>
 
-        {/* Experience Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 className="text-4xl font-bold mb-12 text-center gradient-text">
-            Experiencia
-          </h3>
-          <div className="space-y-6">
-            {experience.map((exp, index) => (
-              <motion.div
-                key={exp.company}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="glass rounded-2xl p-6 md:p-8 hover:scale-[1.02] transition-transform"
-              >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h4 className="text-2xl font-bold text-white mb-1">{exp.role}</h4>
-                    <p className="text-purple-400 font-semibold">{exp.company}</p>
-                  </div>
-                  <div className="glass px-4 py-2 rounded-full text-sm font-medium mt-2 md:mt-0 inline-block">
-                    {exp.period}
-                  </div>
-                </div>
-                <p className="text-white/70 text-lg">{exp.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {FOCUS_AREAS.map((area, index) => (
+            <motion.div
+              key={area.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="panel p-6"
+            >
+              <h3 className="font-mono text-signal text-sm mb-2">{area.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{area.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -3,56 +3,53 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
+const NAV_ITEMS = [
+  { label: 'proyectos', href: '#proyectos' },
+  { label: 'sobre-mi', href: '#sobre-mi' },
+  { label: 'contacto', href: '#contacto' },
+];
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass py-4' : 'py-6'
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${
+        scrolled ? 'bg-ink/90 backdrop-blur border-line' : 'border-transparent'
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-2xl font-bold"
-        >
-          <span className="gradient-text">Portfolio</span>
-        </motion.div>
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between font-mono text-sm">
+        <div className="flex items-center gap-3">
+          <span className="flex gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-line" />
+            <span className="w-2.5 h-2.5 rounded-full bg-line" />
+            <span className="w-2.5 h-2.5 rounded-full bg-signal/60" />
+          </span>
+          <span className="text-fg font-medium">011010</span>
+          <span className="text-muted hidden sm:inline">— husari@portfolio</span>
+        </div>
 
-        <motion.nav
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex gap-8"
-        >
-          {['Proyectos', 'Sobre mí', 'Contacto'].map((item, index) => (
-            <motion.a
-              key={item}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="relative group text-white/80 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        <nav className="flex gap-1">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="group px-3 py-1.5 rounded-md text-muted hover:text-fg hover:bg-white/5 transition-colors"
             >
-              {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300" />
-            </motion.a>
+              <span className="text-signal/70 group-hover:text-signal">~/</span>
+              {item.label}
+            </a>
           ))}
-        </motion.nav>
+        </nav>
       </div>
     </motion.header>
   );

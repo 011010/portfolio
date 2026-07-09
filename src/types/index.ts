@@ -2,20 +2,12 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  longDescription: string;
-  image: string;
   technologies: string[];
-  demoUrl?: string;
+  language: string;
   githubUrl?: string;
+  demoUrl?: string;
+  private?: boolean;
   featured: boolean;
-  color: string;
-  gradient: string;
-  category: 'web' | 'mobile' | 'design' | 'other';
+  category: 'web' | 'automation' | 'other';
   year: number;
-}
-
-export interface TechStack {
-  name: string;
-  color: string;
-  icon?: string;
 }
