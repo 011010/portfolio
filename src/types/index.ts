@@ -1,3 +1,11 @@
+export interface CaseStudy {
+  problem: string;
+  solution: string;
+  impact: string[];
+  features: string[];
+  stack: string[];
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -10,4 +18,5 @@ export interface Project {
   featured: boolean;
   category: 'web' | 'automation' | 'other';
   year: number;
+  caseStudy?: CaseStudy;
 }

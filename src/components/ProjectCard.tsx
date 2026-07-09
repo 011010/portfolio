@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Project } from '@/types';
 
 interface ProjectCardProps {
@@ -66,15 +67,24 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </a>
         )}
 
-        {project.demoUrl && (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-xs text-muted hover:text-fg transition-colors"
+        {project.caseStudy ? (
+          <Link
+            href={`/casos/${project.id}`}
+            className="font-mono text-xs text-signal hover:underline underline-offset-4"
           >
-            demo →
-          </a>
+            ver caso de estudio →
+          </Link>
+        ) : (
+          project.demoUrl && (
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs text-muted hover:text-fg transition-colors"
+            >
+              demo →
+            </a>
+          )
         )}
       </div>
     </motion.div>
