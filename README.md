@@ -21,9 +21,6 @@ npm run build    # build de producción
 npm start        # servir el build
 ```
 
-> Si `next build` termina con `SIGSEGV` o `exit 134`, es Turbopack fallando en
-> el entorno local, no el proyecto. Usa `npx next build --webpack`.
-
 ## Variables de entorno
 
 Copia `.env.example` a `.env.local`:
@@ -93,7 +90,7 @@ Node corriendo:
 2. Construir:
 
    ```bash
-   NEXT_PUBLIC_SITE_URL=https://tudominio.com npx next build --webpack
+   NEXT_PUBLIC_SITE_URL=https://tudominio.com npx next build
    ```
 
    El resultado queda en `out/`.
