@@ -10,11 +10,17 @@ import { projects } from '@/data/projects';
 
 const TERMINAL_LINES = [
   { prompt: '$ whoami', output: 'Husari Orozco' },
-  { prompt: '$ role', output: 'Software Engineer' },
+  { prompt: '$ cat rol', output: 'Desarrollador Full Stack' },
   {
-    prompt: '$ status',
-    output: 'construyendo PWAs y sistemas de automatización en producción',
+    prompt: '$ ls stack',
+    output: 'laravel  react  typescript  rust',
   },
+];
+
+const PROOF = [
+  { label: 'portzilla', detail: 'crates.io · npm · MIT' },
+  { label: 'AnyPS5', detail: '61k ★ upstream · 49 commits' },
+  { label: '17', detail: 'repos públicos' },
 ];
 
 export default function Home() {
@@ -27,61 +33,104 @@ export default function Home() {
       <Header />
 
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center px-6 pt-14">
-        <div className="max-w-4xl mx-auto w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="panel overflow-hidden"
-          >
-            <div className="flex items-center gap-1.5 px-5 py-3 border-b border-line">
-              <span className="w-2.5 h-2.5 rounded-full bg-line" />
-              <span className="w-2.5 h-2.5 rounded-full bg-line" />
-              <span className="w-2.5 h-2.5 rounded-full bg-signal/60" />
-              <span className="ml-3 font-mono text-xs text-muted">~/husari-orozco</span>
-            </div>
+      <section className="relative min-h-screen flex items-center px-6 pt-24 pb-20">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Statement */}
+            <div className="lg:col-span-7">
+              <p
+                className="font-mono text-signal text-sm mb-6 animate-rise"
+                style={{ animationDelay: '0.05s', animationFillMode: 'both' }}
+              >
+                // desarrollador full stack · oaxaca, mx
+              </p>
 
-            <div className="px-6 py-10 md:px-10 md:py-14 font-mono">
-              {TERMINAL_LINES.map((line, index) => (
-                <motion.div
-                  key={line.prompt}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.35, duration: 0.4 }}
-                  className="mb-2"
+              <h1
+                className="text-4xl md:text-6xl font-bold text-fg tracking-tight leading-[1.05] animate-rise"
+                style={{ animationDelay: '0.15s', animationFillMode: 'both' }}
+              >
+                Software para la
+                <br />
+                operación real,
+                <br />
+                <span className="text-signal">no para la demo.</span>
+              </h1>
+
+              <p
+                className="text-muted text-lg leading-relaxed mt-7 max-w-xl animate-rise"
+                style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+              >
+                Sistemas de negocio en producción: evaluación de desempeño,
+                inventario, facturación. Laravel y React en el día a día;
+                Rust cuando el problema no tiene librería.
+              </p>
+
+              <div
+                className="flex flex-wrap gap-4 mt-10 animate-rise"
+                style={{ animationDelay: '0.45s', animationFillMode: 'both' }}
+              >
+                <a
+                  href="#proyectos"
+                  className="px-6 py-3 rounded-lg bg-signal text-ink font-mono text-sm font-medium hover:brightness-110 transition-all"
                 >
-                  <p className="text-muted text-sm">{line.prompt}</p>
-                  <p className="text-2xl md:text-4xl font-medium text-fg mt-1">
-                    {line.output}
-                    {index === TERMINAL_LINES.length - 1 && (
-                      <span className="inline-block w-3 h-7 md:h-9 ml-1 bg-signal align-middle animate-blink" />
-                    )}
-                  </p>
-                </motion.div>
-              ))}
+                  ver proyectos
+                </a>
+                <a
+                  href="#contacto"
+                  className="px-6 py-3 rounded-lg border border-line text-fg/80 font-mono text-sm hover:border-signal/50 hover:text-fg transition-colors"
+                >
+                  contacto
+                </a>
+              </div>
             </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.5 }}
-            className="flex flex-wrap gap-4 mt-8"
+            {/* Terminal — now a supporting element, not the whole screen */}
+            <div
+              className="lg:col-span-5 animate-rise"
+              style={{ animationDelay: '0.35s', animationFillMode: 'both' }}
+            >
+              <div className="panel overflow-hidden">
+                <div className="flex items-center gap-1.5 px-5 py-3 border-b border-line">
+                  <span className="w-2.5 h-2.5 rounded-full bg-line" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-line" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-signal/60" />
+                  <span className="ml-3 font-mono text-xs text-muted">~/husari-orozco</span>
+                </div>
+
+                <div className="px-5 py-6 font-mono text-sm">
+                  {TERMINAL_LINES.map((line, index) => (
+                    <div
+                      key={line.prompt}
+                      className="mb-3 last:mb-0 animate-rise"
+                      style={{ animationDelay: `${0.5 + index * 0.18}s`, animationFillMode: 'both' }}
+                    >
+                      <p className="text-muted">{line.prompt}</p>
+                      <p className="text-fg mt-0.5">
+                        {line.output}
+                        {index === TERMINAL_LINES.length - 1 && (
+                          <span className="inline-block w-2 h-4 ml-1 bg-signal align-middle animate-blink" />
+                        )}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Proof strip */}
+          <div
+            className="mt-16 pt-6 border-t border-line flex flex-wrap gap-x-10 gap-y-3 font-mono text-xs text-muted animate-rise"
+            style={{ animationDelay: '0.6s', animationFillMode: 'both' }}
           >
-            <a
-              href="#proyectos"
-              className="px-6 py-3 rounded-lg bg-signal text-ink font-mono text-sm font-medium hover:brightness-110 transition-all"
-            >
-              ver proyectos
-            </a>
-            <a
-              href="#contacto"
-              className="px-6 py-3 rounded-lg border border-line text-fg/80 font-mono text-sm hover:border-signal/50 hover:text-fg transition-colors"
-            >
-              contacto
-            </a>
-          </motion.div>
+            {PROOF.map((item) => (
+              <span key={item.label} className="flex items-center gap-2">
+                <span className="text-fg">{item.label}</span>
+                <span className="text-line">/</span>
+                <span>{item.detail}</span>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 

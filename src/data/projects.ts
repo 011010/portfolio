@@ -168,13 +168,33 @@ export const projects: Project[] = [
     id: 'sistema-swag',
     title: 'Sistema-SWAG',
     description:
-      'Sistema de automatización de procesos para la Comisión Federal de Electricidad (CFE).',
-    technologies: ['Python', 'Automatización'],
+      'Backend de análisis y reportería para la CFE: ingesta de datos, métricas de tablero, generación de gráficas y exportación de reportes en PDF.',
+    technologies: ['Python', 'Flask', 'PostgreSQL', 'pandas'],
     language: 'Python',
     private: true,
     featured: true,
     category: 'automation',
     year: 2025,
+    caseStudy: {
+      problem:
+        'Los reportes operativos se armaban a mano en hojas de cálculo: consolidar datos, graficar y exportar a PDF tomaba tiempo y el resultado no era reproducible entre una persona y otra.',
+      solution:
+        'API en Flask sobre PostgreSQL que centraliza la ingesta de datos, calcula las métricas del tablero, genera las gráficas y compone el reporte en PDF desde el mismo origen de datos. Las cifras del reporte y las del tablero no pueden divergir porque salen del mismo cálculo.',
+      impact: [
+        'El reporte se genera desde el sistema, sin hojas de cálculo intermedias',
+        'Tablero y PDF comparten la misma fuente, sin cifras que no cuadran',
+        'Historial de archivos y gráficas consultable desde la API',
+      ],
+      features: [
+        'Autenticación JWT con contraseñas hasheadas con bcrypt',
+        'Carga y validación de archivos de datos',
+        'Métricas de tablero y gráficas generadas en servidor',
+        'Composición de reportes en PDF con reportlab',
+        'Rate limiting y cabeceras de seguridad (CSP) en toda la API',
+        'Sanitización de entradas y validación de archivos subidos',
+      ],
+      stack: ['Python', 'Flask', 'PostgreSQL', 'pandas', 'reportlab'],
+    },
   },
   {
     id: 'manifest-processor',
@@ -189,16 +209,36 @@ export const projects: Project[] = [
     year: 2025,
   },
   {
-    id: 'pwa-rais-itam',
-    title: 'pwa',
+    id: 'gestion-activos-pwa',
+    title: 'PWA de gestión de activos',
     description:
-      'Progressive Web App construida sobre el sistema RAIS para gestión de activos de TI (ITAM).',
-    technologies: ['TypeScript', 'PWA'],
+      'PWA offline-first para gestión de activos de TI: escaneo de códigos de barras, firmas digitales, captura de fotos y una cola de sincronización que mantiene la app usable cuando se cae la red.',
+    technologies: ['TypeScript', 'React', 'PWA', 'IndexedDB'],
     language: 'TypeScript',
-    githubUrl: 'https://github.com/011010/pwa',
+    githubUrl: 'https://github.com/011010/asset-management-pwa',
     featured: true,
     category: 'web',
     year: 2025,
+    caseStudy: {
+      problem:
+        'El personal que registra movimientos de activos trabaja en almacenes y oficinas donde la conexión es intermitente. Una app que exige red en cada paso obliga a repetir capturas o a anotar en papel y transcribir después.',
+      solution:
+        'PWA instalable con almacenamiento local en IndexedDB y una cola de operaciones que se acumula sin conexión y se sincroniza al recuperar señal. La captura combina escaneo de códigos de barras, firma digital en pantalla y foto del activo, para que un solo flujo produzca la evidencia completa del movimiento.',
+      impact: [
+        'El registro de un movimiento ocurre en el lugar, sin transcribir después',
+        'La app sigue funcionando sin red y sincroniza al reconectar',
+        'Firma y fotografía quedan asociadas al movimiento en el mismo flujo',
+      ],
+      features: [
+        'Cola de sincronización con IndexedDB',
+        'Escaneo de códigos de barras con la cámara',
+        'Firma digital en pantalla',
+        'Captura y compresión de fotos',
+        'Autenticación con token y renovación de sesión',
+        'Detección de estado de red y reintentos',
+      ],
+      stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'IndexedDB'],
+    },
   },
   {
     id: 'dotahub',
@@ -269,12 +309,11 @@ export const projects: Project[] = [
   },
 ];
 
-// Distribución real de lenguajes en los repos de github.com/011010
-export const languageStats: { name: string; count: number; color: string }[] = [
-  { name: 'TypeScript', count: 7, color: '#4FE3B4' },
-  { name: 'Python', count: 3, color: '#F2A93B' },
-  { name: 'JavaScript', count: 2, color: '#E9E8F0' },
-  { name: 'PHP', count: 1, color: '#8D8FA3' },
-  { name: 'HTML', count: 1, color: '#8D8FA3' },
-  { name: 'Vue', count: 1, color: '#8D8FA3' },
+// Stack agrupado por capa. Antes había un "porcentaje por repos en GitHub",
+// que además de sumar mal no decía nada útil a quien visita el portafolio.
+export const stackGroups: { label: string; items: string[] }[] = [
+  { label: 'Backend', items: ['Laravel', 'PHP', 'Flask', 'Go', 'Rust'] },
+  { label: 'Frontend', items: ['React', 'TypeScript', 'Vue', 'Tailwind CSS'] },
+  { label: 'Datos', items: ['PostgreSQL', 'MySQL', 'SQLite', 'Redis'] },
+  { label: 'Operación', items: ['Docker', 'Nginx', 'Linux'] },
 ];
