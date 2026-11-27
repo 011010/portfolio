@@ -164,19 +164,7 @@ export const projects: Project[] = [
     category: 'web',
     year: 2026,
   },
-  {
-    id: 'sgde-mvp',
-    title: 'sgde-mvp',
-    description:
-      'Sistema de gestión documental: control, clasificación y trazabilidad de documentos para procesos internos.',
-    technologies: ['TypeScript'],
-    language: 'TypeScript',
-    githubUrl: 'https://github.com/011010/sgde-mvp',
-    demoUrl: 'https://sgde.devvex.dev',
-    featured: false,
-    category: 'web',
-    year: 2025,
-  },
+
   {
     id: 'sistema-swag',
     title: 'Sistema-SWAG',
