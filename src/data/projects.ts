@@ -10,6 +10,7 @@ export const projects: Project[] = [
     technologies: ['Rust', 'MCP', 'CLI'],
     language: 'Rust',
     githubUrl: 'https://github.com/011010/portzilla',
+    demoUrl: 'https://011010.github.io/portzilla/',
     featured: false,
     category: 'automation',
     year: 2026,

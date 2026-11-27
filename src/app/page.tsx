@@ -147,11 +147,11 @@ export default function Home() {
             >
               <p className="font-mono text-signal text-sm">{'// en vivo'}</p>
               <p className="font-mono text-xs text-muted">
-                corriendo ahora — ábrelos, no son capturas
+                desplegados y abiertos — no son capturas
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {liveProjects.map((project, index) => (
                 <motion.a
                   key={project.id}
