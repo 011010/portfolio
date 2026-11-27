@@ -1,68 +1,129 @@
-# Husari Orozco — Portfolio
+# Husari Orozco — Portafolio
 
-Portafolio personal construido con Next.js. Muestra proyectos reales tomados
-de [github.com/011010](https://github.com/011010) — PWAs, sistemas de
-automatización y herramientas internas en TypeScript y Python.
+Portafolio personal con Next.js. Muestra proyectos reales de
+[github.com/011010](https://github.com/011010): sistemas de negocio, PWAs
+offline-first y herramientas propias.
+
+Producción: **https://devvex.dev**
 
 ## Tecnologías
 
-- **Next.js 15** — App Router
+- **Next.js 16** — App Router
 - **TypeScript**
-- **Tailwind CSS**
-- **Framer Motion** — animaciones y transiciones
-- **next/font** — JetBrains Mono (display) + Sora (texto)
+- **Tailwind CSS 3**
+- **Framer Motion** — animaciones
+- **next/font** — JetBrains Mono + Sora
 
-## Instalación
+## Desarrollo
 
 ```bash
 npm install
-npm run dev      # desarrollo
-npm run build    # build de producción
-npm start        # producción
+npm run dev      # http://localhost:3000
+npm run lint     # eslint (flat config en eslint.config.mjs)
+npm run build
+npm start
 ```
+
+> `next lint` se eliminó en Next.js 16. El script `lint` llama directo a `eslint`.
 
 ## Estructura
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx     # fuentes + metadata
-│   ├── page.tsx        # hero, proyectos, secciones
-│   └── globals.css
+│   ├── layout.tsx            # fuentes, metadata, Open Graph
+│   ├── page.tsx              # hero, en vivo, proyectos, secciones
+│   ├── opengraph-image.tsx   # tarjeta 1200×630 generada en build
+│   ├── globals.css
+│   └── casos/[slug]/page.tsx # caso de estudio por proyecto
 ├── components/
-│   ├── Background.tsx  # lluvia binaria (canvas), respeta prefers-reduced-motion
+│   ├── Background.tsx        # lluvia binaria, respeta prefers-reduced-motion
 │   ├── Header.tsx
 │   ├── ProjectCard.tsx
-│   ├── About.tsx        # bio + desglose real de lenguajes por repo
-│   └── Contact.tsx       # email + GitHub, sin formulario simulado
-├── data/
-│   └── projects.ts       # datos reales de github.com/011010
-└── types/
-    └── index.ts
+│   ├── About.tsx
+│   └── Contact.tsx
+├── data/projects.ts          # proyectos y stack
+└── types/index.ts
 ```
 
 ## Actualizar proyectos
 
-Edita `src/data/projects.ts`. Cada proyecto:
+Todo vive en `src/data/projects.ts`:
 
 ```typescript
 {
   id: 'slug-unico',
-  title: 'nombre-del-repo',
+  title: 'Nombre visible',
   description: 'Qué hace, en una o dos frases.',
   technologies: ['TypeScript', 'PWA'],
-  language: 'TypeScript',        // usado para el color del punto en la tarjeta
-  githubUrl: 'https://github.com/011010/repo',   // omite si el repo es privado
-  private: true,                                  // opcional, oculta los links y muestra "repositorio privado"
-  featured: true,
-  category: 'web',                // 'web' | 'automation' | 'other'
+  language: 'TypeScript',                        // color del punto en la tarjeta
+  githubUrl: 'https://github.com/011010/repo',   // omitir si es privado
+  demoUrl: 'https://app.devvex.dev',             // aparece en la franja "en vivo"
+  private: true,                                 // muestra "privado" en vez del repo
+  featured: true,                                // va en "Proyectos destacados"
+  category: 'web',                               // 'web' | 'automation' | 'other'
   year: 2026,
+  caseStudy: {
+    problem, solution, impact, features, stack,
+    screenshots: [{ src, alt, caption, width, height }],   // opcional
+  },
 }
 ```
 
-Si actualizas `languageStats` (barra de stack en la sección "Sobre mí"),
-reflejá los conteos reales de lenguajes de tus repos en GitHub.
+Dos reglas que el código asume:
 
-## Deploy
+- **`featured` decide la sección.** Si no lo marcas, el proyecto cae en "más proyectos".
+- **`demoUrl` alimenta la franja "en vivo"** y el botón *ver en vivo* del caso de estudio. Si el proyecto no está desplegado, omítelo: no inventes un enlace.
 
-Recomendado: [Vercel](https://vercel.com) — `vercel` desde la raíz del proyecto.
+Las capturas van en `public/casos/<id>/` en formato `.webp`.
+
+## Despliegue
+
+Corre en un VPS con **Docker + Caddy**. Caddy es el único contenedor que publica
+puertos (80/443) y termina el TLS; el portafolio no expone nada al host.
+
+```
+Internet → Caddy :443 → red Docker "web" → portfolio:3000
+```
+
+### Imagen
+
+`Dockerfile` multi-stage sobre `node:22-alpine` con `output: 'standalone'`
+(ver `next.config.js`). La imagen final corre con el usuario `nextjs`, no como root.
+
+### Variables
+
+`NEXT_PUBLIC_SITE_URL` **se incrusta en el bundle durante el build**, no se lee en
+runtime. Tiene que ser la URL pública real o las etiquetas Open Graph quedan
+apuntando a `localhost` y la tarjeta al compartir sale vacía.
+
+```bash
+cp .env.deploy.example .env   # y ajusta DOMAIN
+```
+
+### Pasos en el servidor
+
+```bash
+# una sola vez, si la red no existe
+docker network create web
+
+cd /opt/husari/apps/portfolio
+docker compose -f docker-compose.deploy.yml up -d --build
+```
+
+Caddy enruta por nombre de contenedor, así que el bloque del proxy queda:
+
+```caddyfile
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy portfolio:3000
+}
+```
+
+### Notas
+
+- No hay que exponer puertos ni montar certificados: Caddy los emite y renueva solo.
+- El build de Next es el paso más pesado. En un VPS de 4 GB conviene construirlo
+  sin otros builds corriendo en paralelo, o añadir swap.
+- `docker compose down -v` borra el volumen de datos. En este proyecto no hay
+  estado persistente, pero el flag es igual de destructivo.
