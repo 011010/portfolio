@@ -4,9 +4,29 @@ import { notFound } from 'next/navigation';
 import Background from '@/components/Background';
 import Header from '@/components/Header';
 import { projects } from '@/data/projects';
+import type { Screenshot } from '@/types';
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>;
+}
+
+function ScreenshotCard({ screenshot }: { screenshot: Screenshot }) {
+  return (
+    <figure className="rounded-lg border border-line overflow-hidden bg-white/[0.02]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={screenshot.src}
+        alt={screenshot.alt}
+        width={screenshot.width}
+        height={screenshot.height}
+        loading="lazy"
+        className="w-full h-auto"
+      />
+      <figcaption className="px-3 py-2.5 border-t border-line font-mono text-[11px] leading-relaxed text-muted">
+        {screenshot.caption}
+      </figcaption>
+    </figure>
+  );
 }
 
 export function generateStaticParams() {
@@ -40,6 +60,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   const { caseStudy } = project;
 
+  const screenshots = caseStudy.screenshots ?? [];
+  const portraitShots = screenshots.filter((shot) => shot.height > shot.width);
+  const landscapeShots = screenshots.filter((shot) => shot.height <= shot.width);
+
   return (
     <div className="min-h-screen relative">
       <Background />
@@ -69,6 +93,31 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </span>
               ))}
             </div>
+
+            {(project.demoUrl || project.githubUrl) && (
+              <div className="flex flex-wrap gap-3 mt-6">
+                {project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2.5 rounded-lg bg-signal text-ink font-mono text-sm font-medium hover:brightness-110 transition-all"
+                  >
+                    ver en vivo ↗
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2.5 rounded-lg border border-line text-fg/80 font-mono text-sm hover:border-signal/50 hover:text-fg transition-colors"
+                  >
+                    código en GitHub
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="panel p-6 md:p-10 mt-6">
@@ -123,17 +172,41 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
           <div className="panel p-6 md:p-10 mt-6">
             <p className="font-mono text-signal text-sm mb-3">{'// capturas'}</p>
-            <h2 className="text-2xl font-bold text-fg mb-4">Capturas</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="aspect-video rounded-lg border border-dashed border-line flex items-center justify-center"
-                >
-                  <span className="font-mono text-xs text-muted">Captura pendiente</span>
-                </div>
-              ))}
-            </div>
+            <h2 className="text-2xl font-bold text-fg mb-6">Capturas</h2>
+            {screenshots.length > 0 ? (
+              <div className="space-y-4">
+                {portraitShots.length > 0 && (
+                  <div
+                    className={
+                      portraitShots.length === 1
+                        ? 'grid gap-4'
+                        : 'grid grid-cols-2 sm:grid-cols-3 gap-4 items-start'
+                    }
+                  >
+                    {portraitShots.map((screenshot) => (
+                      <ScreenshotCard key={screenshot.src} screenshot={screenshot} />
+                    ))}
+                  </div>
+                )}
+                {landscapeShots.length > 0 && (
+                  <div
+                    className={
+                      landscapeShots.length === 1
+                        ? 'grid gap-4'
+                        : 'grid sm:grid-cols-2 gap-4 items-start'
+                    }
+                  >
+                    {landscapeShots.map((screenshot) => (
+                      <ScreenshotCard key={screenshot.src} screenshot={screenshot} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className="text-muted text-sm leading-relaxed">
+                Este sistema es privado, así que no hay capturas publicadas.
+              </p>
+            )}
           </div>
         </div>
       </main>

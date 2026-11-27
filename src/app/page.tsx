@@ -26,6 +26,7 @@ const PROOF = [
 export default function Home() {
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
+  const liveProjects = projects.filter((p) => p.demoUrl);
 
   return (
     <div className="min-h-screen relative">
@@ -33,7 +34,7 @@ export default function Home() {
       <Header />
 
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center px-6 pt-24 pb-20">
+      <section className="relative min-h-[82vh] flex items-center px-6 pt-28 pb-16">
         <div className="max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Statement */}
@@ -132,6 +133,52 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Live demos */}
+      {liveProjects.length > 0 && (
+        <section id="en-vivo" className="relative px-6 pb-8">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-baseline justify-between gap-4 mb-6"
+            >
+              <p className="font-mono text-signal text-sm">{'// en vivo'}</p>
+              <p className="font-mono text-xs text-muted">
+                corriendo ahora — ábrelos, no son capturas
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {liveProjects.map((project, index) => (
+                <motion.a
+                  key={project.id}
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.06, duration: 0.4 }}
+                  className="panel panel-hover p-5 flex flex-col gap-1 group"
+                >
+                  <span className="font-mono text-[11px] text-muted truncate">
+                    {project.demoUrl?.replace('https://', '')}
+                  </span>
+                  <span className="font-medium text-fg group-hover:text-signal transition-colors">
+                    {project.title}
+                  </span>
+                  <span className="font-mono text-xs text-signal mt-1">
+                    abrir <span className="inline-block group-hover:translate-x-0.5 transition-transform">↗</span>
+                  </span>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Featured Projects */}
       <section id="proyectos" className="relative py-24 px-6">

@@ -17,7 +17,7 @@ const FOCUS_AREAS = [
   {
     title: 'Herramientas propias',
     description:
-      'Cuando el problema no existe en ninguna librería, lo escribo: portzilla está en crates.io y npm.',
+      'Cuando el problema no tiene librería, lo escribo: portzilla (crates.io, npm) y loadout, un configurador de teclados hall-effect sobre HID nativo.',
   },
 ];
 

@@ -61,31 +61,33 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-xs text-signal hover:underline underline-offset-4"
+            className="font-mono text-xs text-muted hover:text-fg transition-colors"
           >
             GitHub →
           </a>
         )}
 
-        {project.caseStudy ? (
-          <Link
-            href={`/casos/${project.id}`}
-            className="font-mono text-xs text-signal hover:underline underline-offset-4"
-          >
-            caso de estudio →
-          </Link>
-        ) : (
-          project.demoUrl && (
+        <div className="flex items-center gap-3">
+          {project.demoUrl && (
             <a
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-xs text-muted hover:text-fg transition-colors"
+              className="font-mono text-xs text-signal hover:underline underline-offset-4"
             >
-              demo →
+              demo ↗
             </a>
-          )
-        )}
+          )}
+
+          {project.caseStudy && (
+            <Link
+              href={`/casos/${project.id}`}
+              className="font-mono text-xs text-muted hover:text-signal transition-colors"
+            >
+              caso →
+            </Link>
+          )}
+        </div>
       </div>
     </motion.div>
   );
