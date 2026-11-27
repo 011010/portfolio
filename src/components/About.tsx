@@ -32,7 +32,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <p className="font-mono text-signal text-sm mb-3">// sobre-mi</p>
+          <p className="font-mono text-signal text-sm mb-3">{'// sobre-mi'}</p>
           <h2 className="text-4xl md:text-5xl font-bold text-fg">Cómo trabajo</h2>
         </motion.div>
 

@@ -29,7 +29,7 @@ export default function Header() {
     >
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between font-mono text-sm">
         <div className="flex items-center gap-3">
-          <span className="flex gap-1.5">
+          <span className="hidden sm:flex gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-line" />
             <span className="w-2.5 h-2.5 rounded-full bg-line" />
             <span className="w-2.5 h-2.5 rounded-full bg-signal/60" />
@@ -38,14 +38,14 @@ export default function Header() {
           <span className="text-muted hidden sm:inline">— husari@portfolio</span>
         </div>
 
-        <nav className="flex gap-1">
+        <nav className="flex gap-0.5 sm:gap-1 whitespace-nowrap">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="group px-3 py-1.5 rounded-md text-muted hover:text-fg hover:bg-white/5 transition-colors"
+              className="group px-2 sm:px-3 py-1.5 rounded-md text-muted hover:text-fg hover:bg-white/5 transition-colors"
             >
-              <span className="text-signal/70 group-hover:text-signal">~/</span>
+              <span className="hidden sm:inline text-signal/70 group-hover:text-signal">~/</span>
               {item.label}
             </a>
           ))}

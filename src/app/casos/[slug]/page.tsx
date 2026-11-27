@@ -72,19 +72,19 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
 
           <div className="panel p-6 md:p-10 mt-6">
-            <p className="font-mono text-signal text-sm mb-3">// el problema</p>
+            <p className="font-mono text-signal text-sm mb-3">{'// el problema'}</p>
             <h2 className="text-2xl font-bold text-fg mb-4">El problema</h2>
             <p className="text-muted text-sm leading-relaxed">{caseStudy.problem}</p>
           </div>
 
           <div className="panel p-6 md:p-10 mt-6">
-            <p className="font-mono text-signal text-sm mb-3">// la solución</p>
+            <p className="font-mono text-signal text-sm mb-3">{'// la solución'}</p>
             <h2 className="text-2xl font-bold text-fg mb-4">La solución</h2>
             <p className="text-muted text-sm leading-relaxed">{caseStudy.solution}</p>
           </div>
 
           <div className="panel p-6 md:p-10 mt-6">
-            <p className="font-mono text-signal text-sm mb-3">// impacto</p>
+            <p className="font-mono text-signal text-sm mb-3">{'// impacto'}</p>
             <h2 className="text-2xl font-bold text-fg mb-4">Impacto</h2>
             <ul className="space-y-3">
               {caseStudy.impact.map((item) => (
@@ -97,7 +97,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
 
           <div className="panel p-6 md:p-10 mt-6">
-            <p className="font-mono text-signal text-sm mb-3">// features</p>
+            <p className="font-mono text-signal text-sm mb-3">{'// features'}</p>
             <h2 className="text-2xl font-bold text-fg mb-4">Features</h2>
             <ul className="space-y-3">
               {caseStudy.features.map((feature) => (
@@ -110,7 +110,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
 
           <div className="panel p-6 md:p-10 mt-6">
-            <p className="font-mono text-signal text-sm mb-3">// stack</p>
+            <p className="font-mono text-signal text-sm mb-3">{'// stack'}</p>
             <h2 className="text-2xl font-bold text-fg mb-4">Stack</h2>
             <div className="flex flex-wrap gap-2">
               {caseStudy.stack.map((tech) => (
@@ -122,7 +122,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
 
           <div className="panel p-6 md:p-10 mt-6">
-            <p className="font-mono text-signal text-sm mb-3">// capturas</p>
+            <p className="font-mono text-signal text-sm mb-3">{'// capturas'}</p>
             <h2 className="text-2xl font-bold text-fg mb-4">Capturas</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[0, 1, 2].map((i) => (

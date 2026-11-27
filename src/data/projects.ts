@@ -3,6 +3,68 @@ import { Project } from '@/types';
 // Datos extraídos de github.com/011010 — actualiza aquí cuando publiques algo nuevo.
 export const projects: Project[] = [
   {
+    id: 'portzilla',
+    title: 'portzilla',
+    description:
+      'Capa de coordinación para sesiones paralelas de agentes de IA: arrienda puertos con PID dueño, impide que un agente mate el servidor de otro y da a cada sesión su propio entorno aislado.',
+    technologies: ['Rust', 'MCP', 'CLI'],
+    language: 'Rust',
+    githubUrl: 'https://github.com/011010/portzilla',
+    featured: true,
+    category: 'automation',
+    year: 2026,
+    caseStudy: {
+      problem:
+        'Los agentes de código corren sesiones en paralelo sobre el mismo repo: cada una levanta su servidor de desarrollo, edita archivos compartidos y apunta a la misma base de datos. Hoy se coordinan matando lo que esté ocupando el puerto, que es exactamente la forma de tumbar el trabajo de otra sesión.',
+      solution:
+        'Una capa de arrendamiento: cada proceso reclama un puerto con su PID y una etiqueta de propósito, y los conflictos reciben el siguiente puerto libre en vez de un kill. Un guard intercepta kill, lsof | xargs kill, fuser -k y kill-port cuando el objetivo pertenece a otra sesión viva. Encima de eso hay intents de archivo y slots de entorno con puertos, cachés y base de datos propios.',
+      impact: [
+        'Sesiones paralelas dejan de tumbarse entre sí',
+        'Cada sesión obtiene un entorno aislado sin configuración manual',
+        'Publicado en crates.io y npm, con binario único sin daemon',
+      ],
+      features: [
+        'Arrendamiento de puertos con PID y etiqueta de propósito',
+        'Guard que bloquea kills contra sesiones ajenas',
+        'Intents de archivo con detección de conflicto',
+        'Slots de entorno con puertos y base de datos aislados',
+        'Servidor MCP para que el agente lo use como herramienta',
+        'CI multiplataforma y releases automatizados',
+      ],
+      stack: ['Rust', 'MCP', 'SQLite', 'GitHub Actions'],
+    },
+  },
+  {
+    id: 'anyps5',
+    title: 'AnyPS5',
+    description:
+      'Toolchain que porta ejecutables de PS5 a Linux y Windows. 49 commits en el repositorio upstream, más una línea paralela para macOS.',
+    technologies: ['C++', 'Reverse engineering', 'ELF/PE'],
+    language: 'C++',
+    githubUrl: 'https://github.com/boykopovar/AnyPS5',
+    featured: true,
+    category: 'other',
+    year: 2026,
+    caseStudy: {
+      problem:
+        'Los binarios de PS5 están compilados para un sistema que no es Linux ni Windows: formato de ejecutable propio, syscalls propias y supuestos de hardware que no existen en una PC.',
+      solution:
+        'Trabajo sobre el pipeline de portabilidad del proyecto: traducción de llamadas al sistema y ajustes de compatibilidad para que el mismo ejecutable arranque en Linux y Windows. En paralelo mantengo un track para macOS con su propio conjunto de diferencias.',
+      impact: [
+        '49 commits integrados en un proyecto de más de 61 mil estrellas',
+        'Track de macOS con 41 commits propios',
+        'Cobertura de tres sistemas objetivo desde el mismo pipeline',
+      ],
+      features: [
+        'Traducción de syscalls de PS5 a POSIX y Win32',
+        'Ajustes de compatibilidad por plataforma',
+        'Línea de trabajo independiente para macOS',
+      ],
+      stack: ['C++', 'Linux', 'Windows', 'macOS'],
+    },
+  },
+
+  {
     id: 'hube',
     title: 'hube',
     description:
@@ -10,7 +72,7 @@ export const projects: Project[] = [
     technologies: ['Go', 'React', 'TypeScript', 'SQLite', 'Docker'],
     language: 'Go',
     githubUrl: 'https://github.com/011010/hube',
-    featured: true,
+    featured: false,
     category: 'web',
     year: 2026,
   },
@@ -88,7 +150,7 @@ export const projects: Project[] = [
     technologies: ['WordPress', 'Elementor', 'ACF'],
     language: 'PHP',
     private: true,
-    featured: true,
+    featured: false,
     category: 'web',
     year: 2026,
     caseStudy: {
@@ -117,7 +179,7 @@ export const projects: Project[] = [
     technologies: ['Next.js', 'Laravel', 'PostgreSQL', 'Stripe'],
     language: 'TypeScript',
     private: true,
-    featured: true,
+    featured: false,
     category: 'web',
     year: 2026,
     caseStudy: {
@@ -148,7 +210,7 @@ export const projects: Project[] = [
     technologies: ['TypeScript', 'PWA'],
     language: 'TypeScript',
     private: true,
-    featured: true,
+    featured: false,
     category: 'web',
     year: 2026,
   },
@@ -160,7 +222,7 @@ export const projects: Project[] = [
     technologies: ['TypeScript'],
     language: 'TypeScript',
     githubUrl: 'https://github.com/011010/sgde-mvp',
-    featured: true,
+    featured: false,
     category: 'web',
     year: 2025,
   },
@@ -204,7 +266,7 @@ export const projects: Project[] = [
     technologies: ['Python', 'Automatización'],
     language: 'Python',
     private: true,
-    featured: true,
+    featured: false,
     category: 'automation',
     year: 2025,
   },

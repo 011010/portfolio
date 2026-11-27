@@ -40,7 +40,7 @@ export default function OpengraphImage() {
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ color: '#4FE3B4', fontSize: 24, letterSpacing: 2, marginBottom: 24 }}>
-            // DESARROLLADOR FULL STACK · OAXACA, MX
+            {'// DESARROLLADOR FULL STACK · OAXACA, MX'}
           </div>
           <div
             style={{

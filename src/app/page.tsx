@@ -35,25 +35,24 @@ export default function Home() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center px-6 pt-24 pb-20">
         <div className="max-w-6xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Statement */}
             <div className="lg:col-span-7">
               <p
                 className="font-mono text-signal text-sm mb-6 animate-rise"
                 style={{ animationDelay: '0.05s', animationFillMode: 'both' }}
               >
-                // desarrollador full stack · oaxaca, mx
+                {'// desarrollador full stack · oaxaca, mx'}
               </p>
 
               <h1
+                aria-label="Software para la operación real, no para la demo."
                 className="text-4xl md:text-6xl font-bold text-fg tracking-tight leading-[1.05] animate-rise"
                 style={{ animationDelay: '0.15s', animationFillMode: 'both' }}
               >
-                Software para la
-                <br />
-                operación real,
-                <br />
-                <span className="text-signal">no para la demo.</span>
+                <span className="block">Software para la</span>
+                <span className="block">operación real,</span>
+                <span className="block text-signal">no para la demo.</span>
               </h1>
 
               <p
@@ -144,7 +143,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="mb-12"
           >
-            <p className="font-mono text-signal text-sm mb-3">// proyectos</p>
+            <p className="font-mono text-signal text-sm mb-3">{'// proyectos'}</p>
             <h2 className="text-4xl md:text-5xl font-bold text-fg">Proyectos destacados</h2>
           </motion.div>
 
@@ -163,7 +162,7 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
                 className="font-mono text-sm text-muted mb-8"
               >
-                // más proyectos
+                {'// más proyectos'}
               </motion.h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
