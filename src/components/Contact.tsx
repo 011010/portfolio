@@ -28,7 +28,7 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="font-mono text-signal text-sm mb-3">// contacto</p>
+          <p className="font-mono text-signal text-sm mb-3">{'// contacto'}</p>
           <h2 className="text-4xl md:text-5xl font-bold text-fg mb-4">Hablemos</h2>
           <p className="text-muted text-lg mb-12 max-w-xl mx-auto">
             ¿Tienes un proyecto en mente? Escríbeme directamente, sin formularios de por medio.

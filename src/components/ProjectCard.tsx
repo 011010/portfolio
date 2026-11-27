@@ -29,12 +29,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{ delay: (index % 6) * 0.06, duration: 0.4 }}
       className="panel panel-hover flex flex-col h-full p-6"
     >
-      <div className="flex items-center justify-between mb-4 font-mono text-xs text-muted">
-        <span className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: dotColor }} />
-          011010/{project.title}
+      <div className="flex items-center justify-between gap-3 mb-4 font-mono text-xs text-muted">
+        <span className="flex items-center gap-2 min-w-0">
+          <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: dotColor }} />
+          <span className="truncate">011010/{project.id}</span>
         </span>
-        <span className="tabular-nums">{project.year}</span>
+        <span className="tabular-nums shrink-0">{project.year}</span>
       </div>
 
       <h3 className="font-mono text-lg font-medium text-fg mb-2">{project.title}</h3>
@@ -48,13 +48,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         ))}
       </div>
 
-      <div className="pt-4 border-t border-line flex items-center justify-between">
+      <div className="pt-4 border-t border-line flex items-center justify-between gap-3">
         {project.private ? (
           <span className="font-mono text-xs text-muted flex items-center gap-1.5">
             <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
               <path d="M4 6V4a4 4 0 1 1 8 0v2h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1Zm2 0h4V4a2 2 0 1 0-4 0v2Z" />
             </svg>
-            repositorio privado
+            privado
           </span>
         ) : (
           <a
@@ -63,7 +63,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             rel="noopener noreferrer"
             className="font-mono text-xs text-signal hover:underline underline-offset-4"
           >
-            ver en GitHub →
+            GitHub →
           </a>
         )}
 
@@ -72,7 +72,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             href={`/casos/${project.id}`}
             className="font-mono text-xs text-signal hover:underline underline-offset-4"
           >
-            ver caso de estudio →
+            caso de estudio →
           </Link>
         ) : (
           project.demoUrl && (
