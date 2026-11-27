@@ -1,0 +1,23 @@
+# Stack de producción para el VPS.
+# La red "web" es compartida con el reverse proxy (Caddy) que termina el TLS.
+#
+#   cp .env.deploy.example .env   # y edita DOMAIN
+#   docker compose -f docker-compose.deploy.yml up -d --build
+
+services:
+  portfolio:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: https://${DOMAIN}
+    container_name: portfolio
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+    name: web
